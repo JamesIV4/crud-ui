@@ -10,10 +10,9 @@
           "strict": true,
           "style": "scss"
         },
-        "schematics":{
-          "@schematics/angular:component": {
-             "style": "scss" }
-       }
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
       },
       "root": "",
       "sourceRoot": "src",
@@ -23,7 +22,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "baseHref": "/crud-ui/",
-            "outputPath": "docs/",
+            "outputPath": "docs",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
