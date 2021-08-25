@@ -1,26 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
-import { DatabaseService } from "../database.service";
-
-export interface PeriodicElement {
-    name: string;
-    position: number;
-    weight: number;
-    symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-    {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-    {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-    {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-    {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-    {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-    {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-    {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-    {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-    {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-    {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from '@angular/material/table';
+import { DatabaseService, User } from "../database.service";
 
 @Component({
     selector: 'app-list-view',
@@ -29,28 +11,44 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class ListViewComponent implements OnInit {
-    displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-    dataSource = ELEMENT_DATA;
-    data = ELEMENT_DATA;
+    displayedColumns: string[] = ['id', 'avatar', 'name', 'email', 'dob'];
+    dataSource = new MatTableDataSource(this.database.localData);
 
-    constructor(private database: DatabaseService) {}
+    constructor(public database: DatabaseService) {}
 
-    ngOnInit(): void {}
+    @ViewChild(MatTable) table: MatTable<User>;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    @ViewChild(MatTable) table: MatTable<PeriodicElement>;
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
+
+    ngOnInit() {
+        this.database.fetchData()
+    }
 
     addData() {
-        const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
-        this.dataSource.push(ELEMENT_DATA[randomElementIndex]);
+        //const randomIndex = Math.floor(Math.random() * this.dataSource.length);
+        //this.dataSource.push(this.dataSource[randomIndex]);
         this.table.renderRows();
     }
 
     removeData() {
-        this.dataSource.pop();
+        //this.dataSource.pop();
         this.table.renderRows();
     }
 
     logData() {
-        this.database.getData;
+        console.log(this.database.localData);
+        console.log(this.dataSource);
+    }
+
+    refreshTable() {
+        this.table.renderRows();
+    }
+
+    convertDate(_date: string) {
+        const date = new Date(_date);
+        return `${date.toLocaleString('default', { month: 'long' })} ${date.getDate()}, ${date.getFullYear()}`;
     }
 }
