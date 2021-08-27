@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Add User</h1>
+<div mat-dialog-content>
+    <p>Add a new user to the database</p>
+    <p><strong> ID: {{data.id}}</strong></p>
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="data.name">
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+        <mat-label>Avatar</mat-label>
+        <input matInput [(ngModel)]="data.avatar">
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="data.email">
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+        <mat-label>Date of birth</mat-label>
+        <input matInput [(ngModel)]="data.dob">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

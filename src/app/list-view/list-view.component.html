@@ -1,9 +1,12 @@
 <h1 class="header">User List</h1>
 
 <div class="button-container">
-    <!-- <button mat-raised-button (click)="logData()" class="demo-button">
-        Log data
-    </button> -->
+    <button mat-raised-button (click)="newEntry()" class="demo-button">
+        Add entry
+    </button>
+    <button mat-raised-button (click)="refreshList()" class="demo-button">
+        Refresh list
+    </button>
 </div>
 
 <table
@@ -54,5 +57,6 @@
     [pageSizeOptions]="[5, 10, 20, 30, 50]"
     (page)="onChangePage($event)"
     showFirstLastButtons 
-  aria-label="Select page of users">
+    aria-label="Select page of users"
+>
 </mat-paginator>

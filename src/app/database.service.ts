@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface User {
-    id: number;
+    id?: number;
     name: string;
     avatar: string;
     email: string;
@@ -43,23 +43,37 @@ export class DatabaseService {
             request += '?' + this.parameters.join('&');
         }
 
-        console.log(request);
-
         fetch(request)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                // Get the total number of entries for use in pagination
-                this.rowCount = response.headers.get('X-Total-Count');
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                this.localData = data;
-            })
-            .catch(e => {
-                console.log('There has been a problem with your fetch operation: ' + e.message);
-            });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            // Get the total number of entries for use in pagination
+            this.rowCount = response.headers.get('X-Total-Count');
+            return response.json();
+        })
+        .then(data => {
+            this.localData = data;
+        })
+        .catch(e => {
+            console.log('There has been a problem with your fetch operation: ' + e.message);
+        });
+    }
+
+    async postData(url = 'http://localhost:3000/users', data = {}) {
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            cache: 'default',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify(data)
+        });
+
+        return response.json();
     }
 }
