@@ -12,7 +12,7 @@ export interface User {
   providedIn: 'root'
 })
 export class DatabaseService {
-    localData: User[] = [];
+    users: User[] = [];
     parameters: any = [];
     rowCount: any;
     pageSize = 10;
@@ -23,7 +23,7 @@ export class DatabaseService {
         'direction': ''
     };
 
-    constructor() { }
+    constructor() {}
 
     addParameters() {
         this.parameters.length = 0;
@@ -53,14 +53,14 @@ export class DatabaseService {
             return response.json();
         })
         .then(data => {
-            this.localData = data;
+            this.users = data;
         })
         .catch(e => {
             console.log('There has been a problem with your fetch operation: ' + e.message);
         });
     }
 
-    async postData(url = 'http://localhost:3000/users', data = {}) {
+    async postData(url = 'http://localhost:3000/users/', data = {}) {
         const response = await fetch(url, {
             method: 'POST',
             mode: 'no-cors',
@@ -72,8 +72,12 @@ export class DatabaseService {
             redirect: 'follow',
             referrerPolicy: 'no-referrer',
             body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response);
+            return response;
         });
 
-        return response.json();
+
+        //return response.json();
     }
 }

@@ -6,11 +6,6 @@ import { Sort } from '@angular/material/sort';
 import { DatabaseService, User } from "../database.service";
 import { MatDialog } from '@angular/material/dialog';
 
-export interface DialogData {
-    animal: string;
-    name: string;
-}
-
 @Component({
     selector: 'app-list-view',
     templateUrl: './list-view.component.html',
@@ -28,25 +23,26 @@ export class ListViewComponent implements OnInit {
     @ViewChild(MatTable) table: MatTable<User>;
 
     ngOnInit() {
-        this.database.fetchData()
+        this.database.fetchData();
     }
 
     newEntry() {
-        let newUser: User = {
-            "name": '',
-            "avatar": '',
-            "email": '',
-            "dob": '',
+        let newUser: any = {
+            id: Number,
+            name: '',
+            avatar: '',
+            email: '',
+            dob: '',
         };
 
         const dialogRef = this.dialog.open(NewEntryDialogComponent, {
             width: '350px',
             data: {
-                "id": Number(this.database.rowCount) + 1,
-                "name": newUser.name, 
-                "avatar": newUser.avatar,
-                "email": newUser.email,
-                "dob": newUser.dob
+                id: Number(this.database.rowCount) + 1,
+                name: newUser.name, 
+                avatar: newUser.avatar,
+                email: newUser.email,
+                dob: newUser.dob
             }
         });
 
@@ -55,7 +51,7 @@ export class ListViewComponent implements OnInit {
             newUser = result;
             console.log(newUser);
 
-            this.database.postData('http://localhost:3000/users', newUser)
+            this.database.postData('http://localhost:3000/users/', newUser)
             .then(data => {
                 console.log(data); // JSON data parsed by `data.json()` call
                 this.database.fetchData();

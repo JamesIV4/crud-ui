@@ -1,18 +1,18 @@
 <h1 class="header">User List</h1>
 
 <div class="button-container">
-    <button mat-raised-button (click)="newEntry()" class="demo-button">
+    <button mat-raised-button (click)="newEntry()">
         Add entry
     </button>
-    <button mat-raised-button (click)="refreshList()" class="demo-button">
+    <button mat-raised-button (click)="refreshList()">
         Refresh list
     </button>
 </div>
 
 <table
     mat-table matSort
-    [dataSource]="database.localData"
-    class="mat-elevation-z8 demo-table"
+    [dataSource]="database.users"
+    class="mat-elevation-z8"
     (matSortChange)="sortData($event)"
 >
     <!-- ID Column -->
