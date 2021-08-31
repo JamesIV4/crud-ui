@@ -51,14 +51,22 @@ mat-table {
 .button-container {
 	display: flex;
 	flex-wrap: wrap;
-	margin: 15px 0;
+	margin-bottom: 15px;
 
 	button {
 		margin-top: 10px;
 
-		&:not(:last-of-type) {
-			margin-right: 15px;
+		&:not(:first-of-type) {
+			margin-left: 15px;
 		}
+	}
+
+	.spacer {
+		flex: 1;
+	}
+
+	.group {
+		margin-right: 13px;
 	}
 }
 

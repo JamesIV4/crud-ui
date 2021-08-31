@@ -1,25 +1,30 @@
 <h1 class="header">User List</h1>
 
 <div class="button-container">
-    <button mat-raised-button (click)="newEntry()">
-        Add entry
-    </button>
-    <button mat-raised-button (click)="refreshList()">
-        Refresh list
-    </button>
-    <button mat-raised-button
-        color="accent"
-        (click)="newEntry()"
-        [disabled]="!selection.selected.length">
-        Edit
-    </button>
-    <button
-        mat-raised-button
-        color="warn"
-        (click)="refreshList()"
-        [disabled]="!selection.selected.length">
-        Delete
-    </button>
+    <div class="group">
+        <button mat-raised-button (click)="newEntry()">
+            Add entry
+        </button>
+        <button mat-raised-button (click)="refreshList()">
+            Refresh
+        </button>
+    </div>
+    <div class="spacer"></div>
+    <div>
+        <button mat-raised-button
+            color="accent"
+            (click)="newEntry()"
+            [disabled]="!selection.selected.length">
+            Edit
+        </button>
+        <button
+            mat-raised-button
+            color="warn"
+            (click)="refreshList()"
+            [disabled]="!selection.selected.length">
+            Delete
+        </button>
+    </div>
 </div>
 
 <mat-table
