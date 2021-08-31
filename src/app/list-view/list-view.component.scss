@@ -3,12 +3,43 @@
 	margin-top: 1rem;
 }
 
-table {
+mat-table {
 	width: 100%;
+	word-break: break-all;
+
+	.mat-column-id {
+		flex-basis: 0;
+		min-width: 30px;
+
+		@media (max-width: 450px) {
+			padding-left: 16px;
+		}
+	}
+
+	.mat-column-avatar {
+		flex-basis: 5%;
+		min-width: 60px;
+	}
+
+	.mat-column-name {
+		flex-basis: 17%;
+		min-width: 50px;
+	}
+
+	.mat-column-email {
+		flex-basis: 25%;
+		min-width: 100px;
+	}
+
+	.mat-column-dob {
+		flex-basis: 25%;
+		min-width: 75px;
+		word-break: normal;
+	}
 
 	.avatar {
 		width: 50px;
-		margin-top: 5px;
+		margin: 5px 0;
 	}
 }
 

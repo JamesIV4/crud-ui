@@ -9,47 +9,47 @@
     </button>
 </div>
 
-<table
-    mat-table matSort
+<mat-table
+    matSort
     [dataSource]="database.users"
     class="mat-elevation-z8"
     (matSortChange)="sortData($event)"
 >
     <!-- ID Column -->
     <ng-container matColumnDef="id">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let entry">{{entry.id}}</td>
+        <mat-header-cell mat-sort-header *matHeaderCellDef>ID</mat-header-cell>
+        <mat-cell *matCellDef="let entry">{{entry.id}}</mat-cell>
     </ng-container>
 
     <!-- Avatar Column -->
     <ng-container matColumnDef="avatar">
-      <th mat-header-cell *matHeaderCellDef>Avatar</th>
-      <td mat-cell *matCellDef="let entry">
+      <mat-header-cell *matHeaderCellDef>Avatar</mat-header-cell>
+      <mat-cell *matCellDef="let entry">
         <img [src]="entry.avatar" [alt]="entry.name" class="avatar">
-      </td>
+      </mat-cell>
   </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let entry">{{entry.name}}</td>
+        <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let entry">{{entry.name}}</mat-cell>
     </ng-container>
 
     <!-- Email Column -->
     <ng-container matColumnDef="email">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>Email</th>
-        <td mat-cell *matCellDef="let entry">{{entry.email}}</td>
+        <mat-header-cell mat-sort-header *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell *matCellDef="let entry">{{entry.email}}</mat-cell>
     </ng-container>
 
     <!-- Date-of-birth Column -->
     <ng-container matColumnDef="dob">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>Date-of-birth</th>
-        <td mat-cell *matCellDef="let entry">{{convertDate(entry.dob)}}</td>
+        <mat-header-cell mat-sort-header *matHeaderCellDef>Date of birth</mat-header-cell>
+        <mat-cell *matCellDef="let entry">{{convertDate(entry.dob)}}</mat-cell>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
 
 <mat-paginator
     [length]="database.rowCount"

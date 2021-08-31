@@ -73,6 +73,7 @@ export class DatabaseService {
             referrerPolicy: 'no-referrer',
             body: JSON.stringify(data)
         }).then(response => {
+            console.log('Logging POST response:')
             console.log(response);
             return response;
         });

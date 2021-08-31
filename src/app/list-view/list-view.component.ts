@@ -48,8 +48,8 @@ export class ListViewComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
+            console.log(result.body);
             newUser = result;
-            console.log(newUser);
 
             this.database.postData('http://localhost:3000/users/', newUser)
             .then(data => {
