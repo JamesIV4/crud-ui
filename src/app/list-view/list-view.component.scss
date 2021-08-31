@@ -50,3 +50,9 @@ mat-table {
 		margin-left: 15px;
 	}
 }
+
+.mat-paginator-sticky {
+	bottom: 0px;
+	position: sticky;
+	z-index: 10;
+  }
