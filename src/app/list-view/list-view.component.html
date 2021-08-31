@@ -7,21 +7,18 @@
     <button mat-raised-button (click)="refreshList()">
         Refresh list
     </button>
-
+    <button mat-raised-button
+        color="accent"
+        (click)="newEntry()"
+        [disabled]="!selection.selected.length">
+        Edit
+    </button>
     <button
         mat-raised-button
         color="warn"
         (click)="refreshList()"
-        [disabled]="!selection.selected.length"
-        class="right">
+        [disabled]="!selection.selected.length">
         Delete
-    </button>
-    <button mat-raised-button
-        color="accent"
-        (click)="newEntry()"
-        [disabled]="!selection.selected.length"
-        class="right">
-        Edit
     </button>
 </div>
 
