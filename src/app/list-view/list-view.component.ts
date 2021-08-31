@@ -5,7 +5,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { DatabaseService, User } from "../database.service";
 import { MatDialog } from '@angular/material/dialog';
-
+import { SelectionModel } from '@angular/cdk/collections';
 @Component({
     selector: 'app-list-view',
     templateUrl: './list-view.component.html',
@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 export class ListViewComponent implements OnInit {
     displayedColumns: string[] = ['id', 'avatar', 'name', 'email', 'dob'];
+    selection = new SelectionModel<User>(false); // Passing allowMultiSelect = false here
 
     constructor(
         public database: DatabaseService,
@@ -24,6 +25,12 @@ export class ListViewComponent implements OnInit {
 
     ngOnInit() {
         this.database.fetchData();
+    }
+
+    selectRow(row: any) {
+        this.selection.isSelected(row);
+        this.selection.toggle(row);
+        console.log(row);
     }
 
     newEntry() {
@@ -65,6 +72,10 @@ export class ListViewComponent implements OnInit {
     }
 
     onChangePage(pageEvent: PageEvent) {
+        // Clear any selections
+        this.selection.clear()
+
+        // Pass page info for fetch call parameters
         this.database.pageNum = pageEvent.pageIndex + 1;
         this.database.pageSize = pageEvent.pageSize;
         this.database.fetchData();

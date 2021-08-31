@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
 import { MatInputModule } from "@angular/material/input";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { HttpClientModule } from '@angular/common/http';
 import { NewEntryDialogComponent } from './new-entry-dialog/new-entry-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -31,7 +32,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSortModule,
     MatInputModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

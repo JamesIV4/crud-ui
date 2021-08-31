@@ -7,14 +7,29 @@
     <button mat-raised-button (click)="refreshList()">
         Refresh list
     </button>
+
+    <button
+        mat-raised-button
+        color="warn"
+        (click)="refreshList()"
+        [disabled]="!selection.selected.length"
+        class="right">
+        Delete
+    </button>
+    <button mat-raised-button
+        color="accent"
+        (click)="newEntry()"
+        [disabled]="!selection.selected.length"
+        class="right">
+        Edit
+    </button>
 </div>
 
 <mat-table
     matSort
     [dataSource]="database.users"
     class="mat-elevation-z8"
-    (matSortChange)="sortData($event)"
->
+    (matSortChange)="sortData($event)">
     <!-- ID Column -->
     <ng-container matColumnDef="id">
         <mat-header-cell mat-sort-header *matHeaderCellDef>ID</mat-header-cell>
@@ -48,7 +63,11 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row
+        *matRowDef="let row; columns: displayedColumns;"
+        (click)="selectRow(row)"
+        [ngClass]="{'selected' : selection.isSelected(row)}">
+    </mat-row>
 </mat-table>
 
 <mat-paginator

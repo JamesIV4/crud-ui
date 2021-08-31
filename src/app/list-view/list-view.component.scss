@@ -7,6 +7,11 @@ mat-table {
 	width: 100%;
 	word-break: break-all;
 
+	.selected {
+		border-radius: 3px;
+		box-shadow: inset 0px 0px 0px 2px #4c9bfe;
+	}
+
 	.mat-column-id {
 		flex-basis: 0;
 		min-width: 30px;
@@ -48,6 +53,10 @@ mat-table {
 
 	button:not(:first-of-type) {
 		margin-left: 15px;
+	}
+
+	.right {
+		float: right;
 	}
 }
 
