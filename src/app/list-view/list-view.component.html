@@ -1,26 +1,33 @@
 <h1 class="header">User List</h1>
 
+<mat-form-field [ngClass]="{'active' : database.filtering.active}" class="filter">
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+</mat-form-field>
+
 <div class="button-container">
     <div class="group">
-        <button mat-raised-button (click)="newEntry()">
+        <button mat-raised-button (click)="userChange(true)">
             Add entry
         </button>
         <button mat-raised-button (click)="refreshList()">
             Refresh
+        </button>
+        <button mat-raised-button (click)="toggleFiltering()">
+            Filter
         </button>
     </div>
     <div class="spacer"></div>
     <div>
         <button mat-raised-button
             color="accent"
-            (click)="newEntry()"
+            (click)="userChange()"
             [disabled]="!selection.selected.length">
             Edit
         </button>
         <button
             mat-raised-button
             color="warn"
-            (click)="refreshList()"
+            (click)="deleteUser(this.selection.selected[0].id)"
             [disabled]="!selection.selected.length">
             Delete
         </button>
@@ -42,7 +49,7 @@
     <ng-container matColumnDef="avatar">
       <mat-header-cell *matHeaderCellDef>Avatar</mat-header-cell>
       <mat-cell *matCellDef="let entry">
-        <img [src]="entry.avatar" [alt]="entry.name" class="avatar">
+        <img *ngIf="entry.avatar" [src]="entry.avatar" [alt]="entry.name" class="avatar">
       </mat-cell>
   </ng-container>
 
@@ -79,6 +86,5 @@
     (page)="onChangePage($event)"
     showFirstLastButtons 
     aria-label="Select page of users"
-    class="mat-paginator-sticky"
->
+    class="mat-paginator-sticky">
 </mat-paginator>

@@ -18,9 +18,13 @@ export class DatabaseService {
     pageSize = 10;
     pageNum = 1;
     sort = {
-        'sorting': false,
-        'id': '',
-        'direction': ''
+        sorting: false,
+        id: '',
+        direction: '',
+    };
+    filtering = {
+        active: false,
+        query: ''
     };
 
     constructor() {}
@@ -30,8 +34,12 @@ export class DatabaseService {
         this.parameters.push(`_page=${this.pageNum}`);
         this.parameters.push(`_limit=${this.pageSize}`);
         
-        if (this.sort.sorting === true) {
+        if (this.sort.sorting) {
             this.parameters.push(`_sort=${this.sort.id}&_order=${this.sort.direction}`);
+        }
+
+        if (this.filtering.active) {
+            this.parameters.push(`q=${this.filtering.query}`)
         }
     }
 
@@ -75,10 +83,50 @@ export class DatabaseService {
         }).then(response => {
             console.log('Logging POST response:')
             console.log(response);
-            return response;
+
+            this.fetchData(); // Refresh data after POST
         });
+    }
 
+    putData(url = 'http://localhost:3000/users/', data = {}) {
+        fetch(url, {
+            method: 'PUT',
+            mode: 'cors',
+            cache: 'default',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log('Logging PUT response:')
+            console.log(response);
 
-        //return response.json();
+            this.fetchData(); // Refresh data after POST
+        });
+    }
+
+    deleteData(url = 'http://localhost:3000/users/', userId: any) {
+        const request = url + userId;
+        console.log(request);
+
+        fetch(request, {
+            method: 'DELETE',
+            mode: 'no-cors',
+            cache: 'default',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer'
+        }).then(response => {
+            console.log('Logging DELETE response:')
+            console.log(response);
+
+            this.fetchData(); // Refresh data after POST
+        });
     }
 }

@@ -15,6 +15,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class ListViewComponent implements OnInit {
     displayedColumns: string[] = ['id', 'avatar', 'name', 'email', 'dob'];
     selection = new SelectionModel<User>(false); // Passing allowMultiSelect = false here
+    filtering: boolean = false;
 
     constructor(
         public database: DatabaseService,
@@ -33,42 +34,66 @@ export class ListViewComponent implements OnInit {
         console.log(row);
     }
 
-    newEntry() {
-        let newUser: any = {
-            id: Number,
-            name: '',
-            avatar: '',
-            email: '',
-            dob: '',
-        };
+    toggleFiltering() {
+        if (this.database.filtering.active) {
+            this.database.filtering.active = false;
+            this.database.fetchData(); // Filter is removed, so fetch the data again
+        } else {
+            this.database.filtering.active = true;
+        }
+    }
 
+    applyFilter(event: any) {
+        // Enter is pressed, set filter query parameter and fetch data
+        if (event.key.toLowerCase() === 'enter') {
+            this.database.filtering.query = event.target.value;
+            this.database.fetchData();
+        }
+    }
+
+    userChange(newUser: boolean = false) {
         const dialogRef = this.dialog.open(NewEntryDialogComponent, {
-            width: '350px',
+            width: '35%',
+            minWidth: '350px',
             data: {
-                id: Number(this.database.rowCount) + 1,
-                name: newUser.name, 
-                avatar: newUser.avatar,
-                email: newUser.email,
-                dob: newUser.dob
+                existing: newUser ? false : true,
+                user: {
+                    id: newUser ? '' : this.selection.selected[0].id,
+                    name: newUser ? '' : this.selection.selected[0].name,
+                    avatar: newUser ? '' : this.selection.selected[0].avatar,
+                    email: newUser ? '' : this.selection.selected[0].email,
+                    dob: newUser ? '' : this.selection.selected[0].dob
+                }
             }
         });
 
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
-            console.log(result.body);
-            newUser = result;
+            console.log(result);
 
-            this.database.postData('http://localhost:3000/users/', newUser)
-            .then(data => {
-                console.log(data); // JSON data parsed by `data.json()` call
-                this.database.fetchData();
-            });
+            if (result.confirm === true) { // If confirm was clicked
+                if (newUser) {
+                    console.log('Creating new user');
+                    this.database.postData('http://localhost:3000/users/', result.data.user);
+                } else {
+                    this.selection.clear() // Deselect the user
+                    console.log('Sending edits to user');
+                    this.database.putData('http://localhost:3000/users/', result.data.user);
+                }
+            }
         });
     }
 
+    deleteUser(id: any) {
+        console.log(`Sending request to delete user ${id}`);
+        this.database.deleteData('http://localhost:3000/users/', id);
+    }
+
     convertDate(_date: string) {
-        const date = new Date(_date);
-        return `${date.toLocaleString('default', { month: 'long' })} ${date.getDate()}, ${date.getFullYear()}`;
+        if (_date) {
+            const date = new Date(_date);
+            return `${date.toLocaleString('default', { month: 'long' })} ${date.getDate()}, ${date.getFullYear()}`;
+        } else return '';
     }
 
     onChangePage(pageEvent: PageEvent) {
