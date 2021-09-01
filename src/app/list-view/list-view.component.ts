@@ -58,7 +58,7 @@ export class ListViewComponent implements OnInit {
             data: {
                 existing: newUser ? false : true,
                 user: {
-                    id: newUser ? '' : this.selection.selected[0].id,
+                    id: newUser ? Number(this.database.rowCount) : this.selection.selected[0].id,
                     name: newUser ? '' : this.selection.selected[0].name,
                     avatar: newUser ? '' : this.selection.selected[0].avatar,
                     email: newUser ? '' : this.selection.selected[0].email,
@@ -87,6 +87,7 @@ export class ListViewComponent implements OnInit {
     deleteUser(id: any) {
         console.log(`Sending request to delete user ${id}`);
         this.database.deleteData('http://localhost:3000/users/', id);
+        this.selection.clear() // Deselect the user
     }
 
     convertDate(_date: string) {

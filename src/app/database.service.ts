@@ -68,8 +68,8 @@ export class DatabaseService {
         });
     }
 
-    async postData(url = 'http://localhost:3000/users/', data = {}) {
-        const response = await fetch(url, {
+    postData(url = 'http://localhost:3000/users/', data = {}) {
+        fetch(url, {
             method: 'POST',
             mode: 'no-cors',
             cache: 'default',
@@ -105,6 +105,8 @@ export class DatabaseService {
             console.log(response);
 
             this.fetchData(); // Refresh data after POST
+        }).catch(e => {
+            console.log('There has been a problem with your fetch operation: ' + e.message);
         });
     }
 
@@ -127,6 +129,8 @@ export class DatabaseService {
             console.log(response);
 
             this.fetchData(); // Refresh data after POST
+        }).catch(e => {
+            console.log('There has been a problem with your fetch operation: ' + e.message);
         });
     }
 }
