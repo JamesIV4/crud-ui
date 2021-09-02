@@ -42,13 +42,14 @@
     <!-- ID Column -->
     <ng-container matColumnDef="id">
         <mat-header-cell mat-sort-header *matHeaderCellDef>ID</mat-header-cell>
-        <mat-cell *matCellDef="let entry">{{entry.id}}</mat-cell>
+        <mat-cell *matCellDef="let entry"><span class="mobile">ID:&nbsp;</span>{{entry.id}}</mat-cell>
     </ng-container>
 
     <!-- Avatar Column -->
     <ng-container matColumnDef="avatar">
       <mat-header-cell *matHeaderCellDef>Avatar</mat-header-cell>
       <mat-cell *matCellDef="let entry">
+        <span class="mobile">Avatar:&nbsp;</span>
         <img *ngIf="entry.avatar" [src]="entry.avatar" [alt]="entry.name" class="avatar">
       </mat-cell>
   </ng-container>
@@ -56,19 +57,19 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
         <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let entry">{{entry.name}}</mat-cell>
+        <mat-cell *matCellDef="let entry"><span class="mobile">Name:&nbsp;</span>{{entry.name}}</mat-cell>
     </ng-container>
 
     <!-- Email Column -->
     <ng-container matColumnDef="email">
         <mat-header-cell mat-sort-header *matHeaderCellDef>Email</mat-header-cell>
-        <mat-cell *matCellDef="let entry">{{entry.email}}</mat-cell>
+        <mat-cell *matCellDef="let entry"><span class="mobile">Email:&nbsp;</span>{{entry.email}}</mat-cell>
     </ng-container>
 
     <!-- Date-of-birth Column -->
     <ng-container matColumnDef="dob">
         <mat-header-cell mat-sort-header *matHeaderCellDef>Date of birth</mat-header-cell>
-        <mat-cell *matCellDef="let entry">{{convertDate(entry.dob)}}</mat-cell>
+        <mat-cell *matCellDef="let entry"><span class="mobile">Date of birth:&nbsp;</span>{{convertDate(entry.dob)}}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
