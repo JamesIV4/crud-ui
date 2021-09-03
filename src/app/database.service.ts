@@ -51,20 +51,17 @@ export class DatabaseService {
             request += '?' + this.parameters.join('&');
         }
 
-        fetch(request)
-        .then(response => {
+        fetch(request).then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             // Get the total number of entries for use in pagination
             this.rowCount = response.headers.get('X-Total-Count');
             return response.json();
-        })
-        .then(data => {
+        }).then(data => {
             this.users = data;
-        })
-        .catch(e => {
-            console.log('There has been a problem with your fetch operation: ' + e.message);
+        }).catch(e => {
+            console.log('Error: GET fetch request failed: ' + e.message);
         });
     }
 
@@ -85,6 +82,8 @@ export class DatabaseService {
             console.log(response);
 
             this.fetchData(); // Refresh data after POST
+        }).catch(e => {
+            console.log('Error: POST fetch request failed: ' + e.message);
         });
     }
 
@@ -106,7 +105,7 @@ export class DatabaseService {
 
             this.fetchData(); // Refresh data after POST
         }).catch(e => {
-            console.log('There has been a problem with your fetch operation: ' + e.message);
+            console.log('Error: PUT fetch request failed: ' + e.message);
         });
     }
 
@@ -116,21 +115,21 @@ export class DatabaseService {
 
         fetch(request, {
             method: 'DELETE',
-            mode: 'no-cors',
-            cache: 'default',
-            credentials: 'same-origin',
+            mode: 'cors',
+            //cache: 'no-cache',
+            //credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json'
             },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer'
+            //redirect: 'follow',
+            //referrerPolicy: 'no-referrer'
         }).then(response => {
             console.log('Logging DELETE response:')
             console.log(response);
 
             this.fetchData(); // Refresh data after POST
         }).catch(e => {
-            console.log('There has been a problem with your fetch operation: ' + e.message);
+            console.log('Error: DELETE fetch request failed: ' + e.message);
         });
     }
 }

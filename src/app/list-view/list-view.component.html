@@ -42,34 +42,53 @@
     <!-- ID Column -->
     <ng-container matColumnDef="id">
         <mat-header-cell mat-sort-header *matHeaderCellDef>ID</mat-header-cell>
-        <mat-cell *matCellDef="let entry"><span class="mobile">ID:&nbsp;</span>{{entry.id}}</mat-cell>
+        <mat-cell *matCellDef="let entry">
+            <div class="mobile-header">ID:</div>
+            <div class="flex-spacer"></div>
+            <div class="value">{{entry.id}}</div>
+        </mat-cell>
     </ng-container>
 
     <!-- Avatar Column -->
     <ng-container matColumnDef="avatar">
       <mat-header-cell *matHeaderCellDef>Avatar</mat-header-cell>
       <mat-cell *matCellDef="let entry">
-        <span class="mobile">Avatar:&nbsp;</span>
-        <img *ngIf="entry.avatar" [src]="entry.avatar" [alt]="entry.name" class="avatar">
+        <div class="mobile-header">Avatar:</div>
+        <div class="flex-spacer"></div>
+        <div class="value">
+            <img *ngIf="entry.avatar" [src]="entry.avatar" [alt]="entry.name" class="avatar">
+        </div>
       </mat-cell>
   </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
         <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let entry"><span class="mobile">Name:&nbsp;</span>{{entry.name}}</mat-cell>
+        <mat-cell *matCellDef="let entry">
+            <div class="mobile-header">Name:</div>
+            <div class="flex-spacer"></div>
+            <div class="value">{{entry.name}}</div>
+        </mat-cell>
     </ng-container>
 
     <!-- Email Column -->
     <ng-container matColumnDef="email">
         <mat-header-cell mat-sort-header *matHeaderCellDef>Email</mat-header-cell>
-        <mat-cell *matCellDef="let entry"><span class="mobile">Email:&nbsp;</span>{{entry.email}}</mat-cell>
+        <mat-cell *matCellDef="let entry">
+            <div class="mobile-header">Email:</div>
+            <div class="flex-spacer"></div>
+            <div class="value">{{entry.email}}</div>
+        </mat-cell>
     </ng-container>
 
     <!-- Date-of-birth Column -->
     <ng-container matColumnDef="dob">
         <mat-header-cell mat-sort-header *matHeaderCellDef>Date of birth</mat-header-cell>
-        <mat-cell *matCellDef="let entry"><span class="mobile">Date of birth:&nbsp;</span>{{convertDate(entry.dob)}}</mat-cell>
+        <mat-cell *matCellDef="let entry">
+            <div class="mobile-header">Date of birth:</div>
+            <div class="flex-spacer"></div>
+            <div class="value">{{convertDate(entry.dob)}}</div>
+        </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
