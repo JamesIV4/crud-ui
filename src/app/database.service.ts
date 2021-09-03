@@ -51,7 +51,10 @@ export class DatabaseService {
             request += '?' + this.parameters.join('&');
         }
 
-        fetch(request).then(response => {
+        fetch(request, {
+            method: 'GET',
+            mode: 'cors'
+        }).then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -68,9 +71,9 @@ export class DatabaseService {
     postData(url = 'http://localhost:3000/users/', data = {}) {
         fetch(url, {
             method: 'POST',
-            mode: 'no-cors',
+            mode: 'cors',
             cache: 'default',
-            credentials: 'same-origin',
+            //credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json'
             },
