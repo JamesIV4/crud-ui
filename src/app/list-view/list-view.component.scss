@@ -183,12 +183,10 @@ mat-table {
 
 @media (max-width: 650px) {
 	mat-table {
-		align-items: center;
-		padding: 0 5px;
-
 		mat-row {
-			width: 100%;
+			margin: 6px 13px;
 			max-width: 320px;
+			width: 100%;
 		}
 	}
 }
