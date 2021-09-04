@@ -74,11 +74,11 @@ export class ListViewComponent implements OnInit {
             if (result.confirm === true) { // If confirm was clicked
                 if (newUser) {
                     console.log('Creating new user');
-                    this.database.postData('http://localhost:3000/users/', result.data.user);
+                    this.database.postData(result.data.user);
                 } else {
                     this.selection.clear() // Deselect the user
                     console.log('Sending edits to user');
-                    this.database.putData('http://localhost:3000/users/', result.data.user);
+                    this.database.putData(result.data.user);
                 }
             }
         });

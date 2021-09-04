@@ -20,7 +20,8 @@ server.use((req, res, next) => {
   res.set({
 
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+    'Access-Control-Allow-Headers': 'Content-Type',
   })
 
   if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
@@ -34,5 +35,5 @@ server.use((req, res, next) => {
 
 server.use(router)
 server.listen(3000, () => {
-  console.log('JSON Server is running')
+  console.log('JSON Server is running, please wait for front-end to open')
 })

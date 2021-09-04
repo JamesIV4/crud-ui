@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface User {
@@ -27,7 +28,7 @@ export class DatabaseService {
         query: ''
     };
 
-    constructor() {}
+    constructor(private http: HttpClient) {}
 
     addParameters() {
         this.parameters.length = 0;
@@ -42,6 +43,22 @@ export class DatabaseService {
             this.parameters.push(`q=${this.filtering.query}`)
         }
     }
+
+    // httpPutRequest(body: object) {
+    //     const headers = {
+    //         'Access-Control-Allow-Origin': '*',
+    //         'Content-Type': 'application/json'
+    //     };
+    //     this.http.put<any>('http://localhost:3000/users', body, { headers })
+    //     .subscribe({
+    //         next: data => {
+    //             console.log(data);
+    //         },
+    //         error: error => {
+    //             console.log(error.message);
+    //         }
+    //     });
+    // }
 
     fetchData() {
         let request = 'http://localhost:3000/users';
@@ -68,12 +85,12 @@ export class DatabaseService {
         });
     }
 
-    postData(url = 'http://localhost:3000/users/', data = {}) {
-        fetch(url, {
+    postData(data = {}) {
+        fetch('http://localhost:3000/users/', {
             method: 'POST',
             mode: 'cors',
             cache: 'default',
-            //credentials: 'same-origin',
+            credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -90,8 +107,8 @@ export class DatabaseService {
         });
     }
 
-    putData(url = 'http://localhost:3000/users/', data = {}) {
-        fetch(url, {
+    putData(data = {}) {
+        fetch('http://localhost:3000/users/', {
             method: 'PUT',
             mode: 'cors',
             cache: 'default',
