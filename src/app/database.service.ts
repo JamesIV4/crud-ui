@@ -75,8 +75,10 @@ export class DatabaseService {
             method: type,
             mode: mode,
             cache: 'default',
-            credentials: 'same-origin',
+            credentials: 'include',
             headers: {
+                'Access-Control-Request-Method': type,
+                'Access-Control-Request-Headers': 'Content-Type',
                 'Content-Type': 'application/json'
             },
             redirect: 'follow',

@@ -1,5 +1,6 @@
 // server.js
 const jsonServer = require('json-server')
+const express = require('express')
 //const cors = require('cors')
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')
@@ -16,10 +17,13 @@ server.use(jsonServer.bodyParser)
 //  res.json({msg: 'This is CORS-enabled for all origins!'})
 //})
 
+server.use(express.json({
+  type: ['application/json', 'text/plain']
+}))
+
 server.use((req, res, next) => {
   res.set({
-
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': 'http://localhost:4200',
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
     'Access-Control-Allow-Headers': 'Content-Type',
   })

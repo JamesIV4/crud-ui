@@ -59,7 +59,7 @@ export class ListViewComponent implements OnInit {
             data: {
                 existing: newUser ? false : true,
                 user: {
-                    id: newUser ? Number(this.database.rowCount) : this.selection.selected[0].id,
+                    id: newUser ? Number(this.database.rowCount) + 2 : this.selection.selected[0].id,
                     name: newUser ? '' : this.selection.selected[0].name,
                     avatar: newUser ? '' : this.selection.selected[0].avatar,
                     email: newUser ? '' : this.selection.selected[0].email,
