@@ -57,6 +57,11 @@ mat-table {
 				margin: 5px 0;
 			}
 		}
+
+		&:focus {
+			background-color: #efefef;
+			outline: none;
+		}
 	}
 
 	@media (min-width: 768px) {

@@ -28,11 +28,24 @@ export class ListViewComponent implements OnInit {
         this.database.fetchData();
     }
 
-    selectRow(row: any) {
-        this.selection.isSelected(row);
-        this.selection.toggle(row);
+    selectRow(row: any, event?: any) {
+        const _this = this;
 
-        console.log(`${this.selection.hasValue() ? 'Selected' : 'Deselected'} row${this.selection.hasValue() ? ':\n' + JSON.stringify(row) : '.'}`);
+        // Handle keyboard input to trigger selection
+        if (event) {
+            if (event.key.toLowerCase() === 'enter' || event.code.toLowerCase() === 'space') {
+                toggleSelection();
+            }
+        } else {
+            toggleSelection();
+        }
+
+        function toggleSelection() {
+            _this.selection.isSelected(row);
+            _this.selection.toggle(row);
+
+            console.log(`${_this.selection.hasValue() ? 'Selected' : 'Deselected'} row${_this.selection.hasValue() ? ':\n' + JSON.stringify(row) : '.'}`);
+        }
     }
 
     toggleFiltering() {

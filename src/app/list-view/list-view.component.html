@@ -95,7 +95,9 @@
     <mat-row
         *matRowDef="let row; columns: displayedColumns;"
         (click)="selectRow(row)"
-        [ngClass]="{'selected' : selection.isSelected(row)}">
+        (keyup)="selectRow(row, $event)"
+        [ngClass]="{'selected' : selection.isSelected(row)}"
+        tabindex="0">
     </mat-row>
 </mat-table>
 
