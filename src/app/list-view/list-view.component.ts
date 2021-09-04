@@ -31,7 +31,8 @@ export class ListViewComponent implements OnInit {
     selectRow(row: any) {
         this.selection.isSelected(row);
         this.selection.toggle(row);
-        console.log(row);
+
+        console.log(`${this.selection.hasValue() ? 'Selected' : 'Deselected'} row${this.selection.hasValue() ? ':\n' + JSON.stringify(row) : '.'}`);
     }
 
     toggleFiltering() {
@@ -69,24 +70,23 @@ export class ListViewComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
-            console.log(result);
 
             if (result.confirm === true) { // If confirm was clicked
+                console.log(result.data.user);
+
                 if (newUser) {
                     console.log('Creating new user');
-                    this.database.postData(result.data.user);
+                    this.database.sendRequest('POST', result.data.user);
                 } else {
                     this.selection.clear() // Deselect the user
-                    console.log('Sending edits to user');
-                    this.database.putData(result.data.user);
+                    this.database.sendRequest('PUT', result.data.user);
                 }
             }
         });
     }
 
     deleteUser(id: any) {
-        console.log(`Sending request to delete user ${id}`);
-        this.database.deleteData('http://localhost:3000/users/', id);
+        this.database.sendRequest('DELETE', {}, id);
         this.selection.clear() // Deselect the user
     }
 
