@@ -16,7 +16,6 @@ import { MatButton } from '@angular/material/button';
 export class ListViewComponent implements OnInit {
     displayedColumns: string[] = ['id', 'avatar', 'name', 'email', 'dob'];
     selection = new SelectionModel<User>(false); // Passing allowMultiSelect = false here
-    filtering: boolean = false;
 
     constructor(
         public database: DatabaseService,
@@ -29,13 +28,11 @@ export class ListViewComponent implements OnInit {
         this.database.fetchData();
     }
 
-    selectRow(row: any, event?: any, buttonRef?: MatButton) {
-        const _this = this;
-
+    selectRow(row: User, event?: any, buttonRef?: MatButton) {
         // Handle keyboard input to trigger selection
         if (event) {
             if (event.key.toLowerCase() === 'enter' || event.code.toLowerCase() === 'space') {
-                toggleSelection();
+                this.toggleSelection(row);
 
                 setTimeout(() => {
                     if (this.selection.isSelected(row)) {
@@ -43,15 +40,15 @@ export class ListViewComponent implements OnInit {
                     }
                 }, 20);
             }
-        } else {
-            toggleSelection();
+        } else { // If it's a normal click
+            this.toggleSelection(row);
         }
+    }
 
-        function toggleSelection() {
-            _this.selection.toggle(row);
+    toggleSelection(row: User) {
+        this.selection.toggle(row);
 
-            console.log(`${_this.selection.hasValue() ? 'Selected' : 'Deselected'} row${_this.selection.hasValue() ? ':\n' + JSON.stringify(row) : '.'}`);
-        }
+        console.log(`${this.selection.hasValue() ? 'Selected' : 'Deselected'} row${this.selection.hasValue() ? ':\n' + JSON.stringify(row) : '.'}`);
     }
 
     toggleFiltering(focusOn: HTMLInputElement) {

@@ -84,8 +84,7 @@ export class DatabaseService {
             }),
             body: JSON.stringify(data)
         }).then(response => {
-            console.log(`Logging ${type} response:`)
-            console.log(response);
+            console.log(`Logging ${type} response:\n${response}`)
 
             this.fetchData(); // Refresh data afterwards
         }).catch(e => {
