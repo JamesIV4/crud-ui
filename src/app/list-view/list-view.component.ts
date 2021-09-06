@@ -6,6 +6,7 @@ import { Sort } from '@angular/material/sort';
 import { DatabaseService, User } from "../database.service";
 import { MatDialog } from '@angular/material/dialog';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatButton } from '@angular/material/button';
 @Component({
     selector: 'app-list-view',
     templateUrl: './list-view.component.html',
@@ -28,32 +29,38 @@ export class ListViewComponent implements OnInit {
         this.database.fetchData();
     }
 
-    selectRow(row: any, event?: any) {
+    selectRow(row: any, event?: any, buttonRef?: MatButton) {
         const _this = this;
 
         // Handle keyboard input to trigger selection
         if (event) {
             if (event.key.toLowerCase() === 'enter' || event.code.toLowerCase() === 'space') {
                 toggleSelection();
+
+                setTimeout(() => {
+                    if (this.selection.isSelected(row)) {
+                        buttonRef?.focus();
+                    }
+                }, 20);
             }
         } else {
             toggleSelection();
         }
 
         function toggleSelection() {
-            _this.selection.isSelected(row);
             _this.selection.toggle(row);
 
             console.log(`${_this.selection.hasValue() ? 'Selected' : 'Deselected'} row${_this.selection.hasValue() ? ':\n' + JSON.stringify(row) : '.'}`);
         }
     }
 
-    toggleFiltering() {
+    toggleFiltering(focusOn: HTMLInputElement) {
         if (this.database.filtering.active) {
             this.database.filtering.active = false;
             this.database.fetchData(); // Filter is removed, so fetch the data again
         } else {
             this.database.filtering.active = true;
+            focusOn.select();
         }
     }
 
@@ -72,7 +79,7 @@ export class ListViewComponent implements OnInit {
             data: {
                 existing: newUser ? false : true,
                 user: {
-                    id: newUser ? Number(this.database.rowCount) + 2 : this.selection.selected[0].id,
+                    id: newUser ? '' : this.selection.selected[0].id,
                     name: newUser ? '' : this.selection.selected[0].name,
                     avatar: newUser ? '' : this.selection.selected[0].avatar,
                     email: newUser ? '' : this.selection.selected[0].email,
@@ -92,7 +99,7 @@ export class ListViewComponent implements OnInit {
                     this.database.sendRequest('POST', result.data.user);
                 } else {
                     this.selection.clear() // Deselect the user
-                    this.database.sendRequest('PUT', result.data.user);
+                    this.database.sendRequest('PUT', result.data.user, result.data.user.id);
                 }
             }
         });

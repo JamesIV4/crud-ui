@@ -66,23 +66,22 @@ export class DatabaseService {
     }
 
     sendRequest(type: string, data: object, id?: number) {
-        const request = type === 'DELETE' ? `http://localhost:3000/users/${id}` : 'http://localhost:3000/users';
-        const mode = type === 'POST' ? 'no-cors' : 'cors';
+        let request = 'http://localhost:3000/users'
+
+        if (type === 'PUT' || type === 'DELETE') {
+            request += `/${id}`;
+        }
 
         console.log(`Sending ${type} request to ${request}`)
 
         fetch(request, {
             method: type,
-            mode: mode,
-            cache: 'default',
-            credentials: 'include',
-            headers: {
+            mode: 'cors',
+            headers: new Headers({
                 'Access-Control-Request-Method': type,
                 'Access-Control-Request-Headers': 'Content-Type',
                 'Content-Type': 'application/json'
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
+            }),
             body: JSON.stringify(data)
         }).then(response => {
             console.log(`Logging ${type} response:`)
@@ -93,20 +92,4 @@ export class DatabaseService {
             console.error(`Error: ${type} fetch request failed: ${e.message}`);
         });
     }
-
-    // httpPutRequest(body: object) {
-    //     const headers = {
-    //         'Access-Control-Allow-Origin': '*',
-    //         'Content-Type': 'application/json'
-    //     };
-    //     this.http.put<any>('http://localhost:3000/users', body, { headers })
-    //     .subscribe({
-    //         next: data => {
-    //             console.log(data);
-    //         },
-    //         error: error => {
-    //             console.log(error.message);
-    //         }
-    //     });
-    // }
 }

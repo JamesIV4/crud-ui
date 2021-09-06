@@ -1,7 +1,14 @@
 <h1 class="header">User List</h1>
 
-<mat-form-field [ngClass]="{'active' : database.filtering.active}" class="filter">
-    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+<mat-form-field
+    [ngClass]="{'active' : database.filtering.active}"
+    class="filter">
+    <input
+        matInput (keyup)="applyFilter($event)"
+        placeholder="Filter"
+        [tabindex]="database.filtering.active ? 0 : -1"
+        aria-label="Filter for an entry in the database"
+        #filterElem>
 </mat-form-field>
 
 <div class="button-container">
@@ -12,7 +19,7 @@
         <button mat-raised-button (click)="refreshList()">
             Refresh
         </button>
-        <button mat-raised-button (click)="toggleFiltering()">
+        <button mat-raised-button (click)="toggleFiltering(filterElem)">
             Filter
         </button>
     </div>
@@ -21,14 +28,17 @@
         <button mat-raised-button
             color="accent"
             (click)="userChange()"
-            [disabled]="!selection.selected.length">
+            [disabled]="!selection.selected.length"
+            #buttonEdit
+            aria-label="Edit selected user">
             Edit
         </button>
         <button
             mat-raised-button
             color="warn"
             (click)="deleteUser(this.selection.selected[0].id)"
-            [disabled]="!selection.selected.length">
+            [disabled]="!selection.selected.length"
+            aria-label="Delete selected user">
             Delete
         </button>
     </div>
@@ -41,53 +51,72 @@
     (matSortChange)="sortData($event)">
     <!-- ID Column -->
     <ng-container matColumnDef="id">
-        <mat-header-cell mat-sort-header *matHeaderCellDef>ID</mat-header-cell>
+        <mat-header-cell
+            mat-sort-header
+            *matHeaderCellDef>
+                ID
+            </mat-header-cell>
         <mat-cell *matCellDef="let entry">
             <div class="mobile-header">ID:</div>
             <div class="flex-spacer"></div>
-            <div class="value">{{entry.id}}</div>
+            <div class="value" [attr.aria-label]="'ID: ' + entry.id">{{entry.id}}</div>
         </mat-cell>
     </ng-container>
 
     <!-- Avatar Column -->
     <ng-container matColumnDef="avatar">
-      <mat-header-cell *matHeaderCellDef>Avatar</mat-header-cell>
+      <mat-header-cell
+        *matHeaderCellDef>
+            Avatar
+        </mat-header-cell>
       <mat-cell *matCellDef="let entry">
         <div class="mobile-header">Avatar:</div>
         <div class="flex-spacer"></div>
-        <div class="value">
-            <img *ngIf="entry.avatar" [src]="entry.avatar" [alt]="entry.name" class="avatar">
+        <div class="value" aria-label="User avatar">
+            <img *ngIf="entry.avatar" [src]="entry.avatar" onError="this.src='https://i.imgur.com/CsPQjHg.png'" [alt]="entry.name" class="avatar">
         </div>
       </mat-cell>
   </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-        <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
+        <mat-header-cell
+            mat-sort-header
+            *matHeaderCellDef>
+                Name
+            </mat-header-cell>
         <mat-cell *matCellDef="let entry">
             <div class="mobile-header">Name:</div>
             <div class="flex-spacer"></div>
-            <div class="value">{{entry.name}}</div>
+            <div class="value" [attr.aria-label]="'Name: ' + entry.name">{{entry.name}}</div>
         </mat-cell>
     </ng-container>
 
     <!-- Email Column -->
     <ng-container matColumnDef="email">
-        <mat-header-cell mat-sort-header *matHeaderCellDef>Email</mat-header-cell>
+        <mat-header-cell
+            mat-sort-header
+            *matHeaderCellDef>
+                Email
+            </mat-header-cell>
         <mat-cell *matCellDef="let entry">
             <div class="mobile-header">Email:</div>
             <div class="flex-spacer"></div>
-            <div class="value">{{entry.email}}</div>
+            <div class="value" [attr.aria-label]="'Email: ' + entry.email">{{entry.email}}</div>
         </mat-cell>
     </ng-container>
 
     <!-- Date-of-birth Column -->
     <ng-container matColumnDef="dob">
-        <mat-header-cell mat-sort-header *matHeaderCellDef>Date of birth</mat-header-cell>
+        <mat-header-cell
+            mat-sort-header
+            *matHeaderCellDef>
+                Date of birth
+            </mat-header-cell>
         <mat-cell *matCellDef="let entry">
             <div class="mobile-header">Date of birth:</div>
             <div class="flex-spacer"></div>
-            <div class="value">{{convertDate(entry.dob)}}</div>
+            <div class="value" [attr.aria-label]="'Date of birth: ' + convertDate(entry.dob)">{{convertDate(entry.dob)}}</div>
         </mat-cell>
     </ng-container>
 
@@ -95,9 +124,10 @@
     <mat-row
         *matRowDef="let row; columns: displayedColumns;"
         (click)="selectRow(row)"
-        (keyup)="selectRow(row, $event)"
+        (keyup)="selectRow(row, $event, buttonEdit)"
         [ngClass]="{'selected' : selection.isSelected(row)}"
-        tabindex="0">
+        tabindex="0"
+        [attr.aria-label]="selection.isSelected(row) ? 'Deselect user ' + row.name : ('Select user ' + row.name)">    
     </mat-row>
 </mat-table>
 

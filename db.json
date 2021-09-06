@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 0,
-      "name": "Brad Jones",
+      "name": "Brad Jone",
       "avatar": "https://cdn.fakercloud.com/avatars/miguelkooreman_128.jpg",
       "email": "Valentin.Toy@gmail.com",
       "dob": "1978-06-18T23:17:01.615Z"
@@ -13,41 +13,6 @@
       "avatar": "https://cdn.fakercloud.com/avatars/netonet_il_128.jpg",
       "email": "Alvah_Renner@hotmail.com",
       "dob": "1977-11-09T22:25:20.455Z"
-    },
-    {
-      "id": 2,
-      "name": "Ismael Graham",
-      "avatar": "https://cdn.fakercloud.com/avatars/svenlen_128.jpg",
-      "email": "Axel_Koelpin@yahoo.com",
-      "dob": "1996-07-16T19:40:37.261Z"
-    },
-    {
-      "id": 3,
-      "name": "Ernesto Kreiger",
-      "avatar": "https://cdn.fakercloud.com/avatars/amywebbb_128.jpg",
-      "email": "Dereck55@hotmail.com",
-      "dob": "1996-05-12T10:10:14.667Z"
-    },
-    {
-      "id": 4,
-      "name": "Phillip Hoppe",
-      "avatar": "https://cdn.fakercloud.com/avatars/vimarethomas_128.jpg",
-      "email": "Anya.Fisher77@yahoo.com",
-      "dob": "1992-12-02T12:36:33.245Z"
-    },
-    {
-      "id": 5,
-      "name": "Carrie Auer",
-      "avatar": "https://cdn.fakercloud.com/avatars/zaki3d_128.jpg",
-      "email": "Will.Hintz64@yahoo.com",
-      "dob": "1974-01-28T05:48:25.977Z"
-    },
-    {
-      "id": 6,
-      "name": "Nellie Stokes",
-      "avatar": "https://cdn.fakercloud.com/avatars/nastya_mane_128.jpg",
-      "email": "Mattie_Beier@hotmail.com",
-      "dob": "1998-01-16T16:43:32.639Z"
     },
     {
       "id": 7,
@@ -1749,13 +1714,6 @@
       "avatar": "https://cdn.fakercloud.com/avatars/ryhanhassan_128.jpg",
       "email": "Jerry6@yahoo.com",
       "dob": "1995-08-24T20:54:14.444Z"
-    },
-    {
-      "id": 252,
-      "name": "James",
-      "avatar": "https://media-exp1.licdn.com/dms/image/C4E03AQFnpa5VH7ZVeg/profile-displayphoto-shrink_100_100/0/1628092064238?e=1635984000&v=beta&t=EhTLXQv47rTodrN5L0gkFwfCzbT5Lu4z24sjpJyy-X8",
-      "email": "jamespoundiv@gmail.com",
-      "dob": "1989-12-12T05:00:00.000Z"
     }
   ]
 }
