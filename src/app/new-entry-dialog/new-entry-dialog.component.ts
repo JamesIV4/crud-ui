@@ -27,10 +27,10 @@ export class NewEntryDialogComponent {
         if (!this.data.user.name ||
             !this.data.user.email ||
             this.email.errors) {
-            return false
+            return false;
         }
 
-        return true
+        return true;
     }
 
     onNoClick() {
