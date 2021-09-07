@@ -1,7 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ListViewComponent } from './list-view/list-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,34 +13,36 @@ import { MatInputModule } from "@angular/material/input";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { HttpClientModule } from '@angular/common/http';
 import { NewEntryDialogComponent } from './new-entry-dialog/new-entry-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    ListViewComponent,
-    NewEntryDialogComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    BrowserAnimationsModule,
+const materialModules = [
     MatTableModule,
     MatButtonModule,
-    HttpClientModule,
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
     MatDialogModule,
-    FormsModule,
     MatCheckboxModule,
-    ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+]
+
+@NgModule({
+    declarations: [
+        AppComponent,
+        ListViewComponent,
+        NewEntryDialogComponent
+    ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ...materialModules
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

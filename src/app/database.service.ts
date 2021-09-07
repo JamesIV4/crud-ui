@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface User {
@@ -28,7 +27,7 @@ export class DatabaseService {
         query: ''
     };
 
-    constructor(private http: HttpClient) {}
+    constructor() {}
 
     getParameters() {
         this.parameters.length = 0;

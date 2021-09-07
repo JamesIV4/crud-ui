@@ -7,6 +7,7 @@ import { DatabaseService, User } from "../database.service";
 import { MatDialog } from '@angular/material/dialog';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatButton } from '@angular/material/button';
+
 @Component({
     selector: 'app-list-view',
     templateUrl: './list-view.component.html',
