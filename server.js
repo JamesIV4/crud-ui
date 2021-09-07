@@ -6,5 +6,5 @@ const middlewares = jsonServer.defaults();
 server.use(middlewares);
 server.use(router);
 server.listen(3000, () => {
-    console.log('JSON Server is running, please wait for front-end to open');
+	console.log('JSON Server is running, please wait for front-end to open');
 });

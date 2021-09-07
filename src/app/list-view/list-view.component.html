@@ -1,154 +1,154 @@
 <h1 class="header">User List</h1>
 
 <mat-form-field
-    [ngClass]="{'active' : database.filtering.active}"
-    class="filter">
-    <input
-        matInput (keyup)="applyFilter($event)"
-        placeholder="Filter"
-        [tabindex]="database.filtering.active ? 0 : -1"
-        aria-label="Filter for an entry in the database"
-        data-test="input-filter"
-        #filterElem>
+	[ngClass]="{'active' : database.filtering.active}"
+	class="filter">
+	<input
+		matInput (keyup)="applyFilter($event)"
+		placeholder="Filter"
+		[tabindex]="database.filtering.active ? 0 : -1"
+		aria-label="Filter for an entry in the database"
+		data-test="input-filter"
+		#filterElem>
 </mat-form-field>
 
 <div class="button-container">
-    <div class="group">
-        <button
-            mat-raised-button
-            (click)="userChange(true)"
-            data-test="button-add">
-            Add entry
-        </button>
-        <button
-            mat-raised-button
-            (click)="refreshList()"
-            data-test="button-refresh">
-            Refresh
-        </button>
-        <button
-            mat-raised-button
-            (click)="toggleFiltering(filterElem)"
-            data-test="button-filter">
-            Filter
-        </button>
-    </div>
-    <div class="spacer"></div>
-    <div>
-        <button mat-raised-button
-            color="accent"
-            (click)="userChange()"
-            [disabled]="!selection.selected.length"
-            #buttonEdit
-            aria-label="Edit selected user"
-            data-test="button-edit">
-            Edit
-        </button>
-        <button
-            mat-raised-button
-            color="warn"
-            (click)="deleteUser(this.selection.selected[0].id)"
-            [disabled]="!selection.selected.length"
-            aria-label="Delete selected user"
-            data-test="button-delete">
-            Delete
-        </button>
-    </div>
+	<div class="group">
+		<button
+			mat-raised-button
+			(click)="userChange(true)"
+			data-test="button-add">
+			Add entry
+		</button>
+		<button
+			mat-raised-button
+			(click)="refreshList()"
+			data-test="button-refresh">
+			Refresh
+		</button>
+		<button
+			mat-raised-button
+			(click)="toggleFiltering(filterElem)"
+			data-test="button-filter">
+			Filter
+		</button>
+	</div>
+	<div class="spacer"></div>
+	<div>
+		<button mat-raised-button
+			color="accent"
+			(click)="userChange()"
+			[disabled]="!selection.selected.length"
+			#buttonEdit
+			aria-label="Edit selected user"
+			data-test="button-edit">
+			Edit
+		</button>
+		<button
+			mat-raised-button
+			color="warn"
+			(click)="deleteUser(this.selection.selected[0].id)"
+			[disabled]="!selection.selected.length"
+			aria-label="Delete selected user"
+			data-test="button-delete">
+			Delete
+		</button>
+	</div>
 </div>
 
 <mat-table
-    matSort
-    [dataSource]="database.users"
-    class="mat-elevation-z8"
-    (matSortChange)="sortData($event)">
-    <!-- ID Column -->
-    <ng-container matColumnDef="id">
-        <mat-header-cell
-            mat-sort-header
-            *matHeaderCellDef>
-                ID
-            </mat-header-cell>
-        <mat-cell *matCellDef="let entry">
-            <div class="mobile-header">ID:</div>
-            <div class="flex-spacer"></div>
-            <div class="value" [attr.aria-label]="'ID: ' + entry.id">{{entry.id}}</div>
-        </mat-cell>
-    </ng-container>
+	matSort
+	[dataSource]="database.users"
+	class="mat-elevation-z8"
+	(matSortChange)="sortData($event)">
+	<!-- ID Column -->
+	<ng-container matColumnDef="id">
+		<mat-header-cell
+			mat-sort-header
+			*matHeaderCellDef>
+				ID
+			</mat-header-cell>
+		<mat-cell *matCellDef="let entry">
+			<div class="mobile-header">ID:</div>
+			<div class="flex-spacer"></div>
+			<div class="value" [attr.aria-label]="'ID: ' + entry.id">{{entry.id}}</div>
+		</mat-cell>
+	</ng-container>
 
-    <!-- Avatar Column -->
-    <ng-container matColumnDef="avatar">
-      <mat-header-cell
-        *matHeaderCellDef>
-            Avatar
-        </mat-header-cell>
-      <mat-cell *matCellDef="let entry">
-        <div class="mobile-header">Avatar:</div>
-        <div class="flex-spacer"></div>
-        <div class="value" aria-label="User avatar">
-            <img *ngIf="entry.avatar" [src]="entry.avatar" onError="this.src='https://i.imgur.com/CsPQjHg.png'" [alt]="entry.name" class="avatar">
-        </div>
-      </mat-cell>
+	<!-- Avatar Column -->
+	<ng-container matColumnDef="avatar">
+	  <mat-header-cell
+		*matHeaderCellDef>
+			Avatar
+		</mat-header-cell>
+	  <mat-cell *matCellDef="let entry">
+		<div class="mobile-header">Avatar:</div>
+		<div class="flex-spacer"></div>
+		<div class="value" aria-label="User avatar">
+			<img *ngIf="entry.avatar" [src]="entry.avatar" onError="this.src='https://i.imgur.com/CsPQjHg.png'" [alt]="entry.name" class="avatar">
+		</div>
+	  </mat-cell>
   </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-        <mat-header-cell
-            mat-sort-header
-            *matHeaderCellDef>
-                Name
-            </mat-header-cell>
-        <mat-cell *matCellDef="let entry">
-            <div class="mobile-header">Name:</div>
-            <div class="flex-spacer"></div>
-            <div class="value" [attr.aria-label]="'Name: ' + entry.name">{{entry.name}}</div>
-        </mat-cell>
-    </ng-container>
+	<!-- Name Column -->
+	<ng-container matColumnDef="name">
+		<mat-header-cell
+			mat-sort-header
+			*matHeaderCellDef>
+				Name
+			</mat-header-cell>
+		<mat-cell *matCellDef="let entry">
+			<div class="mobile-header">Name:</div>
+			<div class="flex-spacer"></div>
+			<div class="value" [attr.aria-label]="'Name: ' + entry.name">{{entry.name}}</div>
+		</mat-cell>
+	</ng-container>
 
-    <!-- Email Column -->
-    <ng-container matColumnDef="email">
-        <mat-header-cell
-            mat-sort-header
-            *matHeaderCellDef>
-                Email
-            </mat-header-cell>
-        <mat-cell *matCellDef="let entry">
-            <div class="mobile-header">Email:</div>
-            <div class="flex-spacer"></div>
-            <div class="value" [attr.aria-label]="'Email: ' + entry.email">{{entry.email}}</div>
-        </mat-cell>
-    </ng-container>
+	<!-- Email Column -->
+	<ng-container matColumnDef="email">
+		<mat-header-cell
+			mat-sort-header
+			*matHeaderCellDef>
+				Email
+			</mat-header-cell>
+		<mat-cell *matCellDef="let entry">
+			<div class="mobile-header">Email:</div>
+			<div class="flex-spacer"></div>
+			<div class="value" [attr.aria-label]="'Email: ' + entry.email">{{entry.email}}</div>
+		</mat-cell>
+	</ng-container>
 
-    <!-- Date-of-birth Column -->
-    <ng-container matColumnDef="dob">
-        <mat-header-cell
-            mat-sort-header
-            *matHeaderCellDef>
-                Date of birth
-            </mat-header-cell>
-        <mat-cell *matCellDef="let entry">
-            <div class="mobile-header">Date of birth:</div>
-            <div class="flex-spacer"></div>
-            <div class="value" [attr.aria-label]="'Date of birth: ' + convertDate(entry.dob)">{{convertDate(entry.dob)}}</div>
-        </mat-cell>
-    </ng-container>
+	<!-- Date-of-birth Column -->
+	<ng-container matColumnDef="dob">
+		<mat-header-cell
+			mat-sort-header
+			*matHeaderCellDef>
+				Date of birth
+			</mat-header-cell>
+		<mat-cell *matCellDef="let entry">
+			<div class="mobile-header">Date of birth:</div>
+			<div class="flex-spacer"></div>
+			<div class="value" [attr.aria-label]="'Date of birth: ' + convertDate(entry.dob)">{{convertDate(entry.dob)}}</div>
+		</mat-cell>
+	</ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-    <mat-row
-        *matRowDef="let row; columns: displayedColumns;"
-        (click)="selectRow(row)"
-        (keyup)="selectRow(row, $event, buttonEdit)"
-        [ngClass]="{'selected' : selection.isSelected(row)}"
-        tabindex="0"
-        [attr.aria-label]="selection.isSelected(row) ? 'Deselect user ' + row.name : ('Select user ' + row.name)">    
-    </mat-row>
+	<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+	<mat-row
+		*matRowDef="let row; columns: displayedColumns;"
+		(click)="selectRow(row)"
+		(keyup)="selectRow(row, $event, buttonEdit)"
+		[ngClass]="{'selected' : selection.isSelected(row)}"
+		tabindex="0"
+		[attr.aria-label]="selection.isSelected(row) ? 'Deselect user ' + row.name : ('Select user ' + row.name)">    
+	</mat-row>
 </mat-table>
 
 <mat-paginator
-    [length]="database.rowCount"
-    [pageSize]="database.pageSize"
-    [pageSizeOptions]="[5, 10, 20, 30, 50]"
-    (page)="onChangePage($event)"
-    showFirstLastButtons 
-    aria-label="Select page of users"
-    class="mat-paginator-sticky">
+	[length]="database.rowCount"
+	[pageSize]="database.pageSize"
+	[pageSizeOptions]="[5, 10, 20, 30, 50]"
+	(page)="onChangePage($event)"
+	showFirstLastButtons 
+	aria-label="Select page of users"
+	class="mat-paginator-sticky">
 </mat-paginator>

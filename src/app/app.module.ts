@@ -17,32 +17,32 @@ import { NewEntryDialogComponent } from './new-entry-dialog/new-entry-dialog.com
 import { MatDialogModule } from '@angular/material/dialog';
 
 const materialModules = [
-    MatTableModule,
-    MatButtonModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatInputModule,
-    MatDialogModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatNativeDateModule
+	MatTableModule,
+	MatButtonModule,
+	MatPaginatorModule,
+	MatSortModule,
+	MatInputModule,
+	MatDialogModule,
+	MatCheckboxModule,
+	MatDatepickerModule,
+	MatNativeDateModule
 ]
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        ListViewComponent,
-        NewEntryDialogComponent
-    ],
-    imports: [
-        AppRoutingModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        ...materialModules
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		ListViewComponent,
+		NewEntryDialogComponent
+	],
+	imports: [
+		AppRoutingModule,
+		BrowserModule,
+		BrowserAnimationsModule,
+		FormsModule,
+		ReactiveFormsModule,
+		...materialModules
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
