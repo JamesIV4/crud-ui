@@ -1,17 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
-
-export interface DialogUserData {
-    existing: boolean,
-    user: {
-        id?: number,
-        name: string,
-        avatar: string,
-        email: string,
-        dob: string,
-    }
-}
+import { DialogUserData } from '../app.models';
 
 @Component({
     selector: 'app-new-entry-dialog',

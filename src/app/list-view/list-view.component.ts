@@ -3,10 +3,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { DatabaseService, User } from "../database.service";
+import { DatabaseService } from "../database.service";
 import { MatDialog } from '@angular/material/dialog';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatButton } from '@angular/material/button';
+import { User } from '../app.models';
 
 @Component({
     selector: 'app-list-view',
