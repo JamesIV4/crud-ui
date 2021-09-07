@@ -8,18 +8,28 @@
         placeholder="Filter"
         [tabindex]="database.filtering.active ? 0 : -1"
         aria-label="Filter for an entry in the database"
+        data-test="input-filter"
         #filterElem>
 </mat-form-field>
 
 <div class="button-container">
     <div class="group">
-        <button mat-raised-button (click)="userChange(true)">
+        <button
+            mat-raised-button
+            (click)="userChange(true)"
+            data-test="button-add">
             Add entry
         </button>
-        <button mat-raised-button (click)="refreshList()">
+        <button
+            mat-raised-button
+            (click)="refreshList()"
+            data-test="button-refresh">
             Refresh
         </button>
-        <button mat-raised-button (click)="toggleFiltering(filterElem)">
+        <button
+            mat-raised-button
+            (click)="toggleFiltering(filterElem)"
+            data-test="button-filter">
             Filter
         </button>
     </div>
@@ -30,7 +40,8 @@
             (click)="userChange()"
             [disabled]="!selection.selected.length"
             #buttonEdit
-            aria-label="Edit selected user">
+            aria-label="Edit selected user"
+            data-test="button-edit">
             Edit
         </button>
         <button
@@ -38,7 +49,8 @@
             color="warn"
             (click)="deleteUser(this.selection.selected[0].id)"
             [disabled]="!selection.selected.length"
-            aria-label="Delete selected user">
+            aria-label="Delete selected user"
+            data-test="button-delete">
             Delete
         </button>
     </div>

@@ -8,7 +8,8 @@
             matInput
             [(ngModel)]="data.user.name"
             required
-            aria-label="User name">
+            aria-label="User name"
+            data-test="user-name">
     </mat-form-field>
     <br />
     <mat-form-field appearance="fill">
@@ -16,7 +17,8 @@
         <input
             matInput
             [(ngModel)]="data.user.avatar"
-            aria-label="Avatar URL">
+            aria-label="Avatar URL"
+            data-test="user-avatar">
     </mat-form-field>
     <br />
     <mat-form-field appearance="fill">
@@ -26,6 +28,7 @@
             [formControl]="email"
             [(ngModel)]="data.user.email"
             aria-label="Email address"
+            data-test="user-email"
             required>
         <mat-error *ngIf="email.errors">{{getEmailErrorMessage()}}</mat-error>
     </mat-form-field>
@@ -37,6 +40,7 @@
             [matDatepicker]="picker"
             [(ngModel)]="data.user.dob"
             aria-label="Date of birth"
+            data-test="user-dob"
             [max]="maxDate"
             [min]="minDate">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -44,6 +48,18 @@
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
-    <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="onCloseConfirm()" [disabled]="!isValid()">Save</button>
+    <button
+        mat-button
+        color="warn"
+        (click)="onNoClick()"
+        data-test="dialog-cancel">
+            Cancel
+    </button>
+    <button
+        mat-button
+        (click)="onCloseConfirm()"
+        [disabled]="!isValid()"
+        data-test="dialog-save">
+            Save
+    </button>
 </div>
