@@ -16,7 +16,13 @@ After starting the server, use `ng e2e` or `ng run crud-ui:cypress-open` to open
 - Displays the user list component list-view
 - Adds a new user
 - Edits a user
-- Deletes a user
+- Deletes a user  
+&nbsp;  
+
+## Prerequisites
+
+- Node LTS
+- Angular CLI -- `npm install -g @angular/cli`  
 
 &nbsp;  
 
