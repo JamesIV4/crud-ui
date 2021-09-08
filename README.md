@@ -7,7 +7,7 @@ Use `npm run start` to start the database and run the front-end. It will open a 
 
 ## Run Cypress tests
 
-Use `ng run crud-ui:cypress-open` to open Cypress, and click spec.ts to run end-to-end tests for the following:
+Use `ng e2e` or `ng run crud-ui:cypress-open` to open Cypress, and click spec.ts to run end-to-end tests for the following:
 - Displays the user list component list-view
 - Adds a new user
 - Edits a user
