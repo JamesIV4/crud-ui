@@ -1,4 +1,4 @@
-it('Displays to the user list component list-view', () => {
+it('Displays the user list component list-view', () => {
 	cy.visit('/');
 	cy.get('.header').contains('User List');
 });
