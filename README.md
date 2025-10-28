@@ -21,7 +21,7 @@ After starting the server, use `ng e2e` or `ng run crud-ui:cypress-open` to open
 
 ## Prerequisites
 
-- Node LTS
+- Node 14
 - Angular CLI -- `npm install -g @angular/cli`  
 
 &nbsp;  
